@@ -2,6 +2,10 @@ import 'dart:io';
 import 'dart:convert';
 import 'dart:async';
 
+import '../lib/error_module.dart';
+
+bool hadError = false;
+
 main(List<String> arguments) {
   const int kFilePath = 1;
   if (arguments.length > 1) {
@@ -17,11 +21,13 @@ void runFile(final String path) {
   final file = new File(path);
   Stream<List<int>> inputStream = file.openRead();
   run(inputStream);
+  if (hadError) exit(65);
 }
 
 Future<int> runPrompt() async {
   while (true) {
     await run(stdin);
+    hadError = false;
   }
   return 0;
 }
