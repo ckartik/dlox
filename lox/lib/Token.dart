@@ -1,6 +1,7 @@
 import 'token_types.dart';
 
 class Token {
+
   static const LEFT_PAREN = '(';
   static const RIGHT_PAREN = ')';
   static const LEFT_BRACE = '{';
@@ -12,6 +13,15 @@ class Token {
   static const SEMICOLON = ';';
   static const STAR = '*';
   static const EOF = '';
+  static const BANG = '!';
+  static const EQUAL = '=';
+  static const GREATER= '>';
+  static const LESS = '<';
+  static const SLASH = '/';
+  static const NEW_LINE = '\n';
+  static const SPACE = ' ';
+  static const SPACE_R = '\r';
+  static const SPACE_TAB = '\t';
 
   Object get literal => _literal;
   String get lexeme => _lexeme;

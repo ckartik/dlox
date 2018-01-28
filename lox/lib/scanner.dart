@@ -1,6 +1,6 @@
 import 'token_types.dart';
 import 'token.dart';
-
+import '../src/lox.dart';
 class Scanner {
   final String _source;
   final List<Token> _tokens = [];
@@ -23,6 +23,16 @@ class Scanner {
 
     _tokens.add(new Token(TokenType.EOF, Token.EOF, null, _line));
     return _tokens;
+  }
+
+  String advance() {
+    _current++;
+    return _source[_current - 1];
+  }
+
+  void addToken(TokenType type, [Object literal]) {
+    final text = _source.substring(_start, _current);
+    _tokens.add(new Token(type, text, literal, _line));
   }
 
   void _scanToken() {
@@ -58,6 +68,47 @@ class Scanner {
       case Token.STAR:
         addToken(TokenType.STAR);
         break;
+      case Token.BANG:
+        addToken(match(Token.EQUAL) ? TokenType.BANG_EQUAL : TokenType.BANG);
+        break;
+      case Token.GREATER:
+        addToken(match(Token.EQUAL) ? TokenType.GREATER_EQUAL : TokenType.GREATER);
+        break;
+      case Token.LESS:
+        addToken(match(Token.EQUAL) ? TokenType.LESS_EQUAL: TokenType.LESS);
+        break;
+      case Token.EQUAL:
+        addToken(match(Token.EQUAL) ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
+        break;
+      case Token.SLASH:
+        if(match(Token.SLASH)){
+          while (_peek() != Token.NEW_LINE && !_isAtEnd()) advance();
+        }
+        else addToken(TokenType.SLASH);
+        break;
+      case Token.NEW_LINE:
+        _line++;
+        break;
+      case Token.SPACE:
+        break;
+      case Token.SPACE_R:
+        break;
+      case Token.SPACE_TAB:
+        break;
+      default:
+        Lox.error(_line, "Unexpected character.");
+        break;
     }
+  }
+
+  String _peek() => _isAtEnd() ? '\0' : _source[_current];
+
+  bool match(final String expectedToken){
+    if (_isAtEnd()){ return false; }
+
+    if(_source[_current] != expectedToken){ return false; }
+
+    _current++;
+    return true;
   }
 }
