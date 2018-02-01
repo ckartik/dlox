@@ -22,6 +22,7 @@ class Token {
   static const SPACE = ' ';
   static const SPACE_R = '\r';
   static const SPACE_TAB = '\t';
+  static const STRING = '"';
 
   Object get literal => _literal;
   String get lexeme => _lexeme;

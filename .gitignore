@@ -1,2 +1,5 @@
-#Tooling config/cache files.
+# Tooling config/cache files.
 *.idea
+
+# OS related files.
+*.DS_STORE

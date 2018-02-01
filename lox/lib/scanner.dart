@@ -95,13 +95,63 @@ class Scanner {
         break;
       case Token.SPACE_TAB:
         break;
+      case Token.STRING:
+        _string();
+        break;
       default:
-        Lox.error(_line, "Unexpected character.");
+        if(isDigit(c)){
+          _number();
+    } else {
+          Lox.error(_line, "Unexpected character.");
+        }
         break;
     }
   }
 
+  // TODO(ckartik): Test as this may be a source of headache.
+  bool isDigit(c) => (c >= '0' && c <= '9');
+
+  void _number() {
+    while (isDigit(_peek())) advance();
+
+    // Look for a fractional part.
+    if (_peek() == '.' && isDigit(_peekNext())) {
+      // Consume the "."
+      advance();
+
+      while (isDigit(_peek())) advance();
+    }
+
+    addToken(TokenType.NUMBER,
+        double.parse(_source.substring(_start, _current)));
+  }
+
+  void _string(){
+    while (_peek() != Token.STRING && !_isAtEnd()) {
+      if (_peek() == Token.NEW_LINE) _line++;
+      advance();
+    }
+
+    // Unterminated string.
+    if (_isAtEnd()) {
+      Lox.error(_line, "Unterminated string.");
+      return;
+    }
+
+    // The closing ".
+    advance();
+
+    // Trim the surrounding quotes.
+    String value = _source.substring(_start + 1, _current - 1);
+    addToken(TokenType.STRING, value);
+  }
+
   String _peek() => _isAtEnd() ? '\0' : _source[_current];
+
+  String _peekNext() {
+    if (_current + 1 >= _source.length) return '\0';
+    return _source[_current + 1];
+  }
 
   bool match(final String expectedToken){
     if (_isAtEnd()){ return false; }
