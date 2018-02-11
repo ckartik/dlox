@@ -2,27 +2,27 @@ import 'token_types.dart';
 
 class Token {
 
-  static const LEFT_PAREN = '(';
-  static const RIGHT_PAREN = ')';
-  static const LEFT_BRACE = '{';
-  static const RIGHT_BRACE = '}';
-  static const COMMA = ',';
-  static const DOT = '.';
-  static const MINUS = '-';
-  static const PLUS = '+';
-  static const SEMICOLON = ';';
-  static const STAR = '*';
-  static const EOF = '';
-  static const BANG = '!';
-  static const EQUAL = '=';
-  static const GREATER= '>';
-  static const LESS = '<';
-  static const SLASH = '/';
-  static const NEW_LINE = '\n';
-  static const SPACE = ' ';
-  static const SPACE_R = '\r';
-  static const SPACE_TAB = '\t';
-  static const STRING = '"';
+  static const leftParen = '(';
+  static const rightParen = ')';
+  static const leftBrace = '{';
+  static const rightBrace = '}';
+  static const comma = ',';
+  static const dot = '.';
+  static const minus = '-';
+  static const plus = '+';
+  static const semicolon = ';';
+  static const star = '*';
+  static const eof = '';
+  static const bang = '!';
+  static const equal = '=';
+  static const greater= '>';
+  static const less = '<';
+  static const slash = '/';
+  static const new_line = '\n';
+  static const space = ' ';
+  static const spaceR = '\r';
+  static const spaceTab = '\t';
+  static const string = '"';
 
   Object get literal => _literal;
   String get lexeme => _lexeme;

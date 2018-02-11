@@ -38,64 +38,64 @@ class Scanner {
   void _scanToken() {
     final c = advance();
     switch (c) {
-      case Token.LEFT_PAREN:
-        addToken(TokenType.LEFT_PAREN);
+      case Token.leftParen:
+        addToken(TokenType.leftParen);
         break;
-      case Token.EOF:
-        addToken(TokenType.RIGHT_PAREN);
+      case Token.eof:
+        addToken(TokenType.rightParen);
         break;
-      case Token.LEFT_BRACE:
-        addToken(TokenType.LEFT_BRACE);
+      case Token.leftBrace:
+        addToken(TokenType.leftBrace);
         break;
-      case Token.RIGHT_BRACE:
-        addToken(TokenType.RIGHT_BRACE);
+      case Token.rightBrace:
+        addToken(TokenType.rightBrace);
         break;
-      case Token.COMMA:
-        addToken(TokenType.COMMA);
+      case Token.comma:
+        addToken(TokenType.comma);
         break;
-      case Token.DOT:
-        addToken(TokenType.DOT);
+      case Token.dot:
+        addToken(TokenType.dot);
         break;
-      case Token.MINUS:
-        addToken(TokenType.MINUS);
+      case Token.minus:
+        addToken(TokenType.minus);
         break;
-      case Token.PLUS:
-        addToken(TokenType.PLUS);
+      case Token.plus:
+        addToken(TokenType.plus);
         break;
-      case Token.SEMICOLON:
-        addToken(TokenType.SEMICOLON);
+      case Token.semicolon:
+        addToken(TokenType.semicolon);
         break;
-      case Token.STAR:
-        addToken(TokenType.STAR);
+      case Token.star:
+        addToken(TokenType.star);
         break;
-      case Token.BANG:
-        addToken(match(Token.EQUAL) ? TokenType.BANG_EQUAL : TokenType.BANG);
+      case Token.bang:
+        addToken(_match(Token.equal) ? TokenType.bangEqual : TokenType.bang);
         break;
-      case Token.GREATER:
-        addToken(match(Token.EQUAL) ? TokenType.GREATER_EQUAL : TokenType.GREATER);
+      case Token.greater:
+        addToken(_match(Token.equal) ? TokenType.greaterEqual : TokenType.greater);
         break;
-      case Token.LESS:
-        addToken(match(Token.EQUAL) ? TokenType.LESS_EQUAL: TokenType.LESS);
+      case Token.less:
+        addToken(_match(Token.equal) ? TokenType.lessEqual: TokenType.less);
         break;
-      case Token.EQUAL:
-        addToken(match(Token.EQUAL) ? TokenType.EQUAL_EQUAL : TokenType.EQUAL);
+      case Token.equal:
+        addToken(_match(Token.equal) ? TokenType.equalEqual : TokenType.equal);
         break;
-      case Token.SLASH:
-        if(match(Token.SLASH)){
-          while (_peek() != Token.NEW_LINE && !_isAtEnd()) advance();
+      case Token.slash:
+        if(_match(Token.slash)){
+          while (_peek() != Token.newLine && !_isAtEnd()) advance();
         }
-        else addToken(TokenType.SLASH);
+        else addToken(TokenType.slash);
         break;
-      case Token.NEW_LINE:
+      case Token.newLine:
         _line++;
         break;
-      case Token.SPACE:
+      case Token.space:
         break;
-      case Token.SPACE_R:
+      case Token.spaceR:
         break;
-      case Token.SPACE_TAB:
+      case Token.spaceTab:
         break;
-      case Token.STRING:
+      case Token.string:
         _string();
         break;
       default:
@@ -153,7 +153,7 @@ class Scanner {
     return _source[_current + 1];
   }
 
-  bool match(final String expectedToken){
+  bool _match(final String expectedToken){
     if (_isAtEnd()){ return false; }
 
     if(_source[_current] != expectedToken){ return false; }

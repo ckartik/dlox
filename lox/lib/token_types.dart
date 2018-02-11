@@ -1,49 +1,49 @@
-enum TokenType {
-  // Single-character tokens.
-  LEFT_PAREN,
-  RIGHT_PAREN,
-  LEFT_BRACE,
-  RIGHT_BRACE,
-  COMMA,
-  DOT,
-  MINUS,
-  PLUS,
-  SEMICOLON,
-  SLASH,
-  STAR,
+enum tokentype {
+  // single-character tokens.
+  leftParen,
+  rightParen,
+  leftBrace,
+  rightBrace,
+  comma,
+  dot,
+  minus,
+  plus,
+  semicolon,
+  slash,
+  star,
 
-  // One or two character tokens.
-  BANG,
-  BANG_EQUAL,
-  EQUAL,
-  EQUAL_EQUAL,
-  GREATER,
-  GREATER_EQUAL,
-  LESS,
-  LESS_EQUAL,
+  // one or two character tokens.
+  bang,
+  bangEqual,
+  equal,
+  equalEqual,
+  greater,
+  greaterEqual,
+  less,
+  lessEqual,
 
-  // Literals.
-  IDENTIFIER,
-  STRING,
-  NUMBER,
+  // literals.
+  identifier,
+  string,
+  number,
 
-  // Keywords.
-  AND,
-  CLASS,
-  ELSE,
-  FALSE,
-  FUN,
-  FOR,
-  IF,
-  NIL,
-  OR,
-  PRINT,
-  RETURN,
-  SUPER,
-  THIS,
-  TRUE,
-  VAR,
-  WHILE,
+  // keywords.
+  andKey,
+  classKey,
+  elseKey,
+  falseKey,
+  funKey,
+  forKey,
+  ifKey,
+  nilKey,
+  orKey,
+  printKey,
+  returnKey,
+  superKey,
+  thisKey,
+  trueKey,
+  varKey,
+  whileKey,
 
-  EOF
+  eof
 }
