@@ -1,4 +1,4 @@
-enum tokentype {
+enum TokenType {
   // single-character tokens.
   leftParen,
   rightParen,
@@ -45,5 +45,5 @@ enum tokentype {
   varKey,
   whileKey,
 
-  eof
+  eof,
 }

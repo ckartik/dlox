@@ -21,7 +21,7 @@ class Scanner {
       _scanToken();
     }
 
-    _tokens.add(new Token(TokenType.EOF, Token.EOF, null, _line));
+    _tokens.add(new Token(TokenType.eof, Token.eof, null, _line));
     return _tokens;
   }
 
@@ -82,11 +82,11 @@ class Scanner {
         break;
       case Token.slash:
         if(_match(Token.slash)){
-          while (_peek() != Token.newLine && !_isAtEnd()) advance();
+          while (_peek() != Token.new_line && !_isAtEnd()) advance();
         }
         else addToken(TokenType.slash);
         break;
-      case Token.newLine:
+      case Token.new_line:
         _line++;
         break;
       case Token.space:
@@ -122,13 +122,13 @@ class Scanner {
       while (isDigit(_peek())) advance();
     }
 
-    addToken(TokenType.NUMBER,
+    addToken(TokenType.number,
         double.parse(_source.substring(_start, _current)));
   }
 
   void _string(){
-    while (_peek() != Token.STRING && !_isAtEnd()) {
-      if (_peek() == Token.NEW_LINE) _line++;
+    while (_peek() != Token.string && !_isAtEnd()) {
+      if (_peek() == Token.new_line) _line++;
       advance();
     }
 
@@ -143,7 +143,7 @@ class Scanner {
 
     // Trim the surrounding quotes.
     String value = _source.substring(_start + 1, _current - 1);
-    addToken(TokenType.STRING, value);
+    addToken(TokenType.string, value);
   }
 
   String _peek() => _isAtEnd() ? '\0' : _source[_current];
